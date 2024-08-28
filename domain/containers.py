@@ -36,7 +36,6 @@ def update_container(container_id, **kwargs):
     if container:
         for key, value in kwargs.items():
             setattr(container, key, value)
-        # Update is_empty based on the plant_id
         if 'plant_id' in kwargs:
             container.is_empty = kwargs['plant_id'] == 0
         session.commit()

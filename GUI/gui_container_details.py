@@ -57,7 +57,6 @@ def update_container_details(frame, container):
     current_graph_index = [0]
 
     def display_graph():
-        """Displays the current graph based on the graph index."""
         for widget in graph_frame.winfo_children():
             widget.destroy()
 
@@ -71,7 +70,6 @@ def update_container_details(frame, container):
             create_histogram(graph_frame, sensor_data_cache)
 
     def cycle_graph():
-        """Cycles to the next graph type."""
         current_graph_index[0] = (current_graph_index[0] + 1) % len(graph_types)
         display_graph()
 
@@ -124,7 +122,6 @@ def create_line_chart(parent, sensor_data):
     ax.set_title("Line Chart")
     ax.legend()
 
-    # Embed the plot in Tkinter
     canvas = FigureCanvasTkAgg(fig, master=parent)
     canvas.draw()
     canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
@@ -153,7 +150,6 @@ def create_pie_chart(parent, sensor_data):
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
 def create_histogram(parent, sensor_data):
-    """Creates a histogram and embeds it in the provided frame."""
     fig, ax = plt.subplots()
     data = []
     if sensor_data['moisture']:
@@ -172,7 +168,6 @@ def create_histogram(parent, sensor_data):
         canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
 
 def load_image(image_path):
-    """Loads an image from the given path and returns a PhotoImage object."""
     try:
         img = Image.open(image_path)
         img = img.resize((100, 100), Image.ANTIALIAS)
@@ -194,7 +189,6 @@ def sync_sensor_data(container, sensor_data_cache, details_frame, graph_frame, d
         if sensor.sensor_type == "light":
             sensor_data_cache["light"].append(sensor.light)
             sensor.light = random.uniform(0, 100)
-            # Keep only the last CACHE_SIZE readings
             if len(sensor_data_cache["light"]) > CACHE_SIZE:
                 sensor_data_cache["light"] = sensor_data_cache["light"][-CACHE_SIZE:]
         elif sensor.sensor_type == "moisture":

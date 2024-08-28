@@ -1,5 +1,5 @@
 import tkinter as tk
-import random  # Import random for generating sensor values
+import random
 from domain.database import session
 from domain.containers import Container, create_container, update_container, delete_container
 from domain.plants import get_all_plants, Plant
@@ -65,7 +65,6 @@ def open_container_details_window(parent_frame, update_overview_func):
 
     container_listbox.bind('<<ListboxSelect>>', on_container_select)
 
-    # Deselect button
     deselect_button = tk.Button(details_frame, text="Deselect", command=clear_entries)
     deselect_button.grid(row=3, column=0, columnspan=2, pady=10)
 
